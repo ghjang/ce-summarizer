@@ -20,7 +20,7 @@ function restoreBackgroundColor(colors) {
 }
 
 window.addEventListener('keydown', function (event) {
-    if (event.ctrlKey && event.shiftKey && event.key === 'S') {
+    if (event.ctrlKey && event.shiftKey && (event.key === 'S' || event.key === 'ㄴ')) {
         let selection = window.getSelection();
         let selectedText = selection.toString();
 
