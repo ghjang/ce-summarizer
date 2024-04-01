@@ -82,9 +82,9 @@ window.addEventListener('mouseleave', function (event) {
 
 let boxId = 0;
 
-function createPostItBox(left, top, text) {
-    const boxWidth = 300;
-    const boxHeight = 150;
+function createPostItBox(left, top, srcText, defaultContentText = '요약 중...') {
+    const boxWidth = 400;
+    const boxHeight = 200;
 
     if (left + boxWidth > window.innerWidth) {
         left = window.innerWidth - boxWidth;
@@ -145,9 +145,10 @@ function createPostItBox(left, top, text) {
     const contentArea = document.createElement('div');
     contentArea.id = `contentArea${boxId}`; // 고유한 id 부여
     contentArea.style.padding = '10px';
+    contentArea.innerText = defaultContentText;
     box.appendChild(contentArea);
 
-    chrome.runtime.sendMessage({ command: 'summarizeText', text: text, boxId: boxId }, function (response) {
+    chrome.runtime.sendMessage({ command: 'summarizeText', text: srcText, boxId: boxId }, function (response) {
         if (response) {
             if (response.error) {
                 contentArea.innerText = response.error;

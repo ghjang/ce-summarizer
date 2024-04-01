@@ -1,12 +1,15 @@
 {
     "manifest_version": 3,
     "name": "summarizer",
-    "version": "0.1",
+    "version": "0.2",
     "background": {
         "service_worker": "scripts/background.js"
     },
     "permissions": [
         "tabs"
+    ],
+    "host_permissions": [
+        "http://localhost:3000/*"
     ],
     "content_scripts": [
         {
@@ -16,17 +19,6 @@
             "matches": [
                 "http://*/*",
                 "https://*/*"
-            ],
-            "exclude_matches": [
-                "https://chat.openai.com/*"
-            ]
-        },
-        {
-            "js": [
-                "scripts/content_chatgpt.js"
-            ],
-            "matches": [
-                "https://chat.openai.com/*"
             ]
         }
     ]
